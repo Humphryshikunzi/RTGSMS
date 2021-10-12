@@ -1,0 +1,41 @@
+{% extends "main/layout.html" %}
+
+{% block content %}    
+    <div class="our_courses mt-10">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="section_title text-center mb-100">
+                        <h3>Impact of RTGSMS  </h3>
+                        <p>Check some of the impact<br>
+                            that RTGSMS is creating in the Community
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row" >  
+                <div class="col-lg-6">
+                    <img style="margin-right: 10px;height: 400px;width: 600px;" src="{{ url_for('static', filename='images/e48bfe2b49a14ae4b33d897ee501bf65_18.jpeg') }}" alt="">
+                    <br>
+                    <p>RTGSMS being used at Butalang'i, Western Kenya</p>
+                    <br>                
+                    <br>
+                </div>                   
+               
+            </div>
+
+            <div class="row" >  
+                <div class="col-lg-6">
+                    <img style="margin-right: 10px;height: 400px;width: 600px;" src="{{ url_for('static', filename='images/Murang’a-County-meteorological-department-800x500.gif') }}" alt="">
+                    <br>
+                    <p>RTGSMS being used to predict landslides in Murang'a, Central Kenya</p>
+                    <br>                
+                    <br>
+                </div>                   
+               
+            </div>
+        </div>
+    </div>
+    <!-- our_courses_end -->
+
+{% endblock content %}
