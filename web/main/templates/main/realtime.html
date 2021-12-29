@@ -1,0 +1,109 @@
+{%block content%}
+
+<div>
+	<div style="margin-bottom: 10px;">		
+	   <h3 style="font-size: 10;">Other Device Data</h3> 
+	   <P>Device       : <span id="device"></span>,   Location : Lat : <span id="lat"></span>, Long : <span id="long"></span></P>
+	   <p>Acceleration : X_ACC : <span id="x_acc"></span>, Y_ACC : <span id="y_acc"></span>, Z_ACC : <span id="z_acc"></span></p>
+	</div>
+	<div id="chartContainer" style="height: 500px; width:100%;"></div>
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+		
+	<script> 
+	
+		// Credit goes to https://canvasjs.com/javascript-charts/custom-legend-chart/  		
+		window.onload = function () {
+		
+		var dps = []; // dataPoints
+		var chart = new CanvasJS.Chart("chartContainer", {
+			title :{
+				text: "RTGSMS Ground Vibration Against Time",
+				fontWeight:"lighter",
+				fontSize: 20
+			},
+			axisX: {
+            title: "Time (Minutes)",
+            },
+			axisY: {
+            title: "Geophone Analog Value \n (12Bit Resolution)",
+            },
+			data: [{
+				type: "line",
+				dataPoints: dps
+			}]
+		});
+		
+		var xVal = 0;
+		var yVal = 100; 
+		var updateInterval = 5000; // in seconds
+		var dataLength = 20; // number of dataPoints visible at any point
+		var data;
+		
+		
+		var updateChart = async function (count) {
+		
+			count = count || 1;	     
+			/*for (var j = 0; j < count; j++) {
+				yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
+				dps.push({
+					x: xVal,
+					y: yVal
+				});
+				xVal++;
+			}*/
+
+			//clear the chart here firts before update
+
+			const data_url = 'http://134.209.237.213:5000/api/Rtgsms/recentMessages' 
+			await fetch(data_url) 
+			.then(response => response.json())
+			.then(dataResponse => data = dataResponse )
+            .catch(err => console.error(err)); 
+			
+			var data_length = data.length-1;
+			var time = data[data_length].time;
+			var device = data[data_length].device;
+			var lat = data[data_length].lat;
+			var long = data[data_length].long; 
+			var x_acc = data[data_length].z_acc;
+			var y_acc = data[data_length].y_acc;
+			var z_acc = data[data_length].z_acc; 
+			var geophone_analog_value; 
+			
+            var j=0;
+
+			for(i=data_length; i>0; i--){
+				time = data[i].time
+				geophone_analog_value = data[i].geophone_analog_value 
+				dps.push({x:j, y:geophone_analog_value})
+				j++
+				
+			}     
+			console.log(dps) 
+			 
+			dps.shift();
+            dps = [];
+			document.getElementById('device').innerHTML = device
+			document.getElementById('lat').innerHTML = lat
+			document.getElementById('long').innerText = long
+			document.getElementById('x_acc').innerHTML = x_acc
+			document.getElementById('y_acc').innerHTML = y_acc
+			document.getElementById('z_acc').innerHTML = z_acc
+
+		
+			chart.render();
+		};
+		
+		updateChart(dataLength);
+		setInterval(function()
+		{
+			updateChart()	
+		
+		}, updateInterval);
+
+		}
+						
+		</script>
+</div>
+
+{%endblock content%}
