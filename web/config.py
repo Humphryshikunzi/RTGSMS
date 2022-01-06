@@ -10,3 +10,4 @@ HEADERS = {
 }
 
 HOST = '0.0.0.0'
+BASE_URI = 'http://rtgsmsapi.defrilab.com/api/'

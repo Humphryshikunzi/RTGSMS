@@ -10,10 +10,10 @@ from main.home import home
 from main.home.forms import SearchForm, LoginForm
 from models import  PlacesContainer
 from models import UserModel
-from config import  HEADERS
+from config import  HEADERS, BASE_URI
 
 def auth_user(payload):
-    response = requests.post(url="" + "User/authenticateUser", data=json.dumps(payload), headers=HEADERS, verify=False)
+    response = requests.post(BASE_URI + "User/authenticateUser", data=json.dumps(payload), headers=HEADERS, verify=False)
     return response
 
 @home.route('/')
@@ -81,7 +81,7 @@ def login():
             session['user'] = user_reponse
             next_page = request.args.get('next')
             flash("Log in successful", 'success')
-            return redirect(next_page) if next_page else redirect(url_for('main.home'))
+            return redirect(next_page) if next_page else redirect(url_for('home.home_page'))
         else:
             flash('Login unsuccessful. Check email or password', 'danger')
     return render_template('main/login.html', title='Login', form=form)
