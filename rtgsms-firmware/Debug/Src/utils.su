@@ -1,0 +1,2 @@
+utils.c:9:7:dateTimeFormat	48	static
+utils.c:17:9:adcToPercent	8	static

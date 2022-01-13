@@ -1,0 +1,5 @@
+L70R.c:27:6:l70_init	0	static
+L70R.c:42:6:l70_standby	8	static
+L70R.c:57:6:l70_mode	8	static
+L70R.c:72:9:l70_parse	48	static
+L70R.c:152:10:convertRawCoords	16	static

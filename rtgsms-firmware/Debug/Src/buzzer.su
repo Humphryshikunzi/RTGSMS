@@ -1,0 +1,2 @@
+buzzer.c:23:6:setBuzzerFreq	40	static
+buzzer.c:62:6:stopBuzzer	8	static

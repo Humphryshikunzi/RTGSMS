@@ -1,0 +1,2 @@
+sht30x.c:24:6:sht30x_init	0	static
+sht30x.c:33:9:sht30x_get	48	static
