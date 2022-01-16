@@ -188,7 +188,7 @@ int main(void) {
 		usart_puts(&huart1, buffer);
 		HAL_ADC_Stop(&hadc); // stop adc
 		//send packets to sigfox cloud
-		//sendSigfoxPacket();
+		sendSigfoxPacket();
 		HAL_Delay(5000);
 		/* USER CODE END WHILE */
 
